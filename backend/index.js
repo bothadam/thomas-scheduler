@@ -26,6 +26,6 @@ app.post("/create-product-expiry-reminder", (req, res) => {
   res.sendStatus(200);
 });
 
-app.listen(port, () => {
+app.listen(port, "localhost", () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
