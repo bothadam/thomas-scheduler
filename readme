@@ -1,0 +1,8 @@
+to start on server
+
+cd into frontend/backend
+pm2 start index.js
+
+pm2 stop index
+
+pm2 delete index
