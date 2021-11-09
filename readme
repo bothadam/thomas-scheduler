@@ -6,3 +6,21 @@ pm2 start index.js
 pm2 stop index
 
 pm2 delete index
+
+cd /etc/apache2/sites-available/
+cd /etc/nginx/sites-available/
+
+
+/var/www/thomas-scheduler-frontend
+
+
+
+___________________________________
+
+to deploy frontend
+
+
+sudo apt-get update
+sudo apt-get install nginx
+
+https://jgefroh.medium.com/a-guide-to-using-nginx-for-static-websites-d96a9d034940
