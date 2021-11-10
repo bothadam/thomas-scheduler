@@ -1,6 +1,12 @@
 .App {
   text-align: center;
   display: flex;
-  align-items: center;
-  justify-items: center;
+  align-content: center;
+  justify-content: center;
+}
+
+.Scheduler {
+  padding-top: 50px;
+  height: 400px;
+  display: grid;
 }

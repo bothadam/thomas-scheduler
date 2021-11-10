@@ -10,7 +10,7 @@ function Scheduler({}) {
   const { REACT_APP_API_URL } = process.env;
 
   return (
-    <div className="">
+    <div className="Scheduler">
       <TextField
         value={itemName}
         label="Item Name"
@@ -32,18 +32,21 @@ function Scheduler({}) {
             `${REACT_APP_API_URL}/create-product-expiry-reminder`,
             true
           );
+
           xhr.setRequestHeader("Content-Type", "application/json");
 
           xhr.send(
             JSON.stringify({
               "item-name": itemName,
+              "expiry-date": expiryDate,
             })
           );
         }}
-        id="hey"
+        id="add-schedule"
         variant="contained"
+        style={{ height: 50 }}
       >
-        hey
+        Create Reminder
       </Button>
     </div>
   );

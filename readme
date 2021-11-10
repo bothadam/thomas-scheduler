@@ -1,7 +1,11 @@
 to start on server
 
-cd into frontend/backend
-pm2 start index.js
+cd into ~/thomas-scheduler/backend
+sudo pm2 start backend.js
+
+sudo systemctl start nginx
+
+/////
 
 pm2 stop index
 

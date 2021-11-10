@@ -7,7 +7,7 @@ app.use(cors());
 
 const port = 3000;
 
-const allowedOrigins = ["http://localhost:3000", "http://34.105.157.177/"];
+const allowedOrigins = ["http://localhost:2000", "http://34.105.157.177"];
 app.use(
   cors({
     origin: function (origin, callback) {
@@ -32,6 +32,8 @@ app.get("/", (req, res) => {
 
 app.post("/create-product-expiry-reminder", (req, res) => {
   const expiryReminderData = JSON.stringify(req.body);
+
+  console.log(expiryReminderData);
 
   res.sendStatus(200);
 });
