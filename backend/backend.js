@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const schedule = require("node-schedule");
+var nodemailer = require("nodemailer");
 
 const app = express();
 app.use(express.json());
@@ -39,7 +40,29 @@ app.post("/create-product-expiry-reminder", (req, res) => {
   schedule.scheduleJob(
     scheduledDate,
     function (x) {
-      // send email here
+      var transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+          user: "visionzclan007@gmail.com",
+          pass: "onoqihwrqhdxavwq",
+        },
+      });
+
+      var mailOptions = {
+        from: "visionzclan007@gmail.com",
+        to: "adambotha007@gmail.com veltie007@gmail.com",
+        subject: "This product will expire",
+        text: `This product will expire: ${x}`,
+      };
+
+      transporter.verify().then(console.log).catch(console.error);
+      transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log("Email sent: " + info.response);
+        }
+      });
     }.bind(null, itemName)
   );
 
