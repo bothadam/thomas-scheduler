@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import "./Scheduler.css";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import DatePicker from "@mui/lab/DatePicker";
+// import DatePicker from "@mui/lab/DatePicker";
+import DateTimePicker from "@mui/lab/DateTimePicker";
 
 function Scheduler({}) {
   const [itemName, setItemName] = useState("");
@@ -16,7 +17,8 @@ function Scheduler({}) {
         label="Item Name"
         onChange={(e) => setItemName(e.target.value)}
       />
-      <DatePicker
+      <DateTimePicker
+        disablePast
         label="Expiry Date"
         value={expiryDate}
         onChange={(newValue) => {
@@ -37,8 +39,8 @@ function Scheduler({}) {
 
           xhr.send(
             JSON.stringify({
-              "item-name": itemName,
-              "expiry-date": expiryDate,
+              itemName: itemName,
+              expiryDate: expiryDate,
             })
           );
         }}

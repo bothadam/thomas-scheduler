@@ -1,5 +1,6 @@
 const express = require("express");
-var cors = require("cors");
+const cors = require("cors");
+const schedule = require("node-schedule");
 
 const app = express();
 app.use(express.json());
@@ -31,9 +32,16 @@ app.get("/", (req, res) => {
 });
 
 app.post("/create-product-expiry-reminder", (req, res) => {
-  const expiryReminderData = JSON.stringify(req.body);
+  const { itemName, expiryDate } = req.body;
 
-  console.log(expiryReminderData);
+  const scheduledDate = new Date(expiryDate);
+
+  schedule.scheduleJob(
+    scheduledDate,
+    function (x) {
+      // send email here
+    }.bind(null, itemName)
+  );
 
   res.sendStatus(200);
 });
