@@ -1,9 +1,9 @@
 cd /home/adambotha007/thomas-scheduler
 
 echo "Pulling latest changes"
-sudo git checkout master
-sudo git fetch origin
-sudo git pull
+git checkout master
+git fetch origin
+git pull
 
 echo "Restarting backend"
 sudo pm2 stop backend
