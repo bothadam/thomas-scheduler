@@ -1,6 +1,6 @@
 to start on server
 
-cd into ~/thomas-scheduler/backend
+cd ~/thomas-scheduler/backend
 sudo pm2 start backend.js
 
 sudo systemctl start nginx
