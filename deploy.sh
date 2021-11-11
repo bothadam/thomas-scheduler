@@ -8,7 +8,7 @@ sudo git pull
 echo "Restarting backend"
 sudo pm2 stop backend
 cd /home/adambotha007/thomas-scheduler/backend
-sudo pm2 start backend
+sudo pm2 start backend.js
 
 echo "Rebuild frontend and restart nginx"
 cd /home/adambotha007/thomas-scheduler/frontend
