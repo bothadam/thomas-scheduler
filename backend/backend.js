@@ -50,7 +50,7 @@ app.post("/create-product-expiry-reminder", (req, res) => {
 
       var mailOptions = {
         from: "visionzclan007@gmail.com",
-        to: "adambotha007@gmail.com veltie007@gmail.com",
+        to: "adambotha007@gmail.com, veltie007@gmail.com",
         subject: "This product will expire",
         text: `This product will expire: ${x}`,
       };

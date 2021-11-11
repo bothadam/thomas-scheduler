@@ -10,6 +10,29 @@ function Scheduler({}) {
   const [expiryDate, setExpiryDate] = useState(null);
   const { REACT_APP_API_URL } = process.env;
 
+  const scheduleEventButtonClicked = () => {
+    var xhr = new XMLHttpRequest();
+    xhr.open(
+      "POST",
+      `${REACT_APP_API_URL}/create-product-expiry-reminder`,
+      false
+    );
+
+    xhr.setRequestHeader("Content-Type", "application/json");
+
+    xhr.send(
+      JSON.stringify({
+        itemName: itemName,
+        expiryDate: expiryDate,
+      })
+    );
+
+    setItemName("");
+    setExpiryDate(null);
+
+    alert("Reminder has been set");
+  };
+
   return (
     <div className="Scheduler">
       <TextField
@@ -27,23 +50,7 @@ function Scheduler({}) {
         renderInput={(params) => <TextField {...params} />}
       />
       <Button
-        onClick={() => {
-          var xhr = new XMLHttpRequest();
-          xhr.open(
-            "POST",
-            `${REACT_APP_API_URL}/create-product-expiry-reminder`,
-            true
-          );
-
-          xhr.setRequestHeader("Content-Type", "application/json");
-
-          xhr.send(
-            JSON.stringify({
-              itemName: itemName,
-              expiryDate: expiryDate,
-            })
-          );
-        }}
+        onClick={scheduleEventButtonClicked}
         id="add-schedule"
         variant="contained"
         style={{ height: 50 }}
