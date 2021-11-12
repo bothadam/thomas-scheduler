@@ -2,12 +2,15 @@ const express = require("express");
 const cors = require("cors");
 const schedule = require("node-schedule");
 var nodemailer = require("nodemailer");
+const sqlite3 = require("sqlite3");
 
 const app = express();
 app.use(express.json());
 app.use(cors());
 
 const port = 3000;
+
+const db = new sqlite3.Database("../db/thomas-scheduler.db");
 
 const allowedOrigins = ["http://localhost:2000", "http://34.105.157.177"];
 app.use(
@@ -27,9 +30,18 @@ app.use(
   })
 );
 
-app.get("/", (req, res) => {
-  console.log("ajb req", req.query);
-  res.send("Hello World!" + req.query);
+app.get("/scheduled-expiry-items", (req, res) => {
+  const scheduledExpiryItems = [];
+  db.all("SELECT * FROM expiry_reminders", (error, rows) => {
+    if (error) throw error;
+    for (const row of rows) {
+      // items.push(row.value);
+      scheduledExpiryItems.push(row);
+      console.log("ajb", row);
+    }
+
+    res.send(scheduledExpiryItems);
+  });
 });
 
 app.post("/create-product-expiry-reminder", (req, res) => {
