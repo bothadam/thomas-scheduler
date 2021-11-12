@@ -1,6 +1,6 @@
 .ScheduledItems {
-  width: 600px;
-  padding: 50px;
+  margin-bottom: 50px;
+  width: 80%;
   display: grid;
   display: flex;
   flex-direction: column;
