@@ -35,7 +35,6 @@ app.get("/scheduled-expiry-items", (req, res) => {
   db.all("SELECT * FROM expiry_reminders", (error, rows) => {
     if (error) throw error;
     for (const row of rows) {
-      // items.push(row.value);
       scheduledExpiryItems.push(row);
       console.log("ajb", row);
     }
@@ -48,6 +47,8 @@ app.post("/create-product-expiry-reminder", (req, res) => {
   const { itemName, expiryDate } = req.body;
 
   const scheduledDate = new Date(expiryDate);
+
+  logScheduledItemInDb({ itemName, expiryDate });
 
   schedule.scheduleJob(
     scheduledDate,
@@ -80,6 +81,14 @@ app.post("/create-product-expiry-reminder", (req, res) => {
 
   res.sendStatus(200);
 });
+
+const logScheduledItemInDb = ({ itemName, expiryDate }) => {
+  const insert = db.prepare(
+    "INSERT INTO expiry_reminders(item_name, expiry_date) VALUES(?,?)"
+  );
+  insert.run(itemName, expiryDate);
+  insert.finalize();
+};
 
 app.listen(port, "localhost", () => {
   console.log(`Example app listening at http://localhost:${port}`);

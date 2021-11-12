@@ -1,0 +1,7 @@
+.Scheduler {
+  width: 300px;
+  height: 400px;
+  align-self: center;
+  display: grid;
+  padding-top: 50px;
+}

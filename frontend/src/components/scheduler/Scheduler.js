@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "./Scheduler.css";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-// import DatePicker from "@mui/lab/DatePicker";
 import DateTimePicker from "@mui/lab/DateTimePicker";
 
 function Scheduler({}) {
