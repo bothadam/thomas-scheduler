@@ -1,0 +1,25 @@
+.ScheduledItems {
+  width: 600px;
+  padding: 50px;
+  display: grid;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+}
+
+.scheduled-item-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 50px;
+  font-size: 20px;
+  border: 1px solid black;
+}
+
+.scheduled-item-column {
+  display: grid;
+  align-items: center;
+}
+
+.scheduled-item-row.header {
+  font-weight: bold;
+}

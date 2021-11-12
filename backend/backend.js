@@ -36,7 +36,6 @@ app.get("/scheduled-expiry-items", (req, res) => {
     if (error) throw error;
     for (const row of rows) {
       scheduledExpiryItems.push(row);
-      console.log("ajb", row);
     }
 
     res.send(scheduledExpiryItems);
