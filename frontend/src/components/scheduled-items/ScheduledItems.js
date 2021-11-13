@@ -36,8 +36,13 @@ function ScheduledItems({}) {
       <div className="scheduled-item-row header">
         <div className="scheduled-item-column">Item Name</div>
         <div className="scheduled-item-column">Expiry Date</div>
+        <div className="scheduled-item-column">Days Until Expiry</div>
       </div>
       {scheduledItems.map((scheduledItem) => {
+        const timeUntilExpiry = moment(scheduledItem.expiry_date).diff(
+          moment.now(),
+          "days"
+        );
         return (
           <div className="scheduled-item-row">
             <div className="scheduled-item-column">
@@ -45,6 +50,9 @@ function ScheduledItems({}) {
             </div>
             <div className="scheduled-item-column">
               {moment(scheduledItem.expiry_date).format("yyyy/MM/DD")}
+            </div>
+            <div className="scheduled-item-column">
+              {timeUntilExpiry > 0 ? timeUntilExpiry : "expired"}
             </div>
           </div>
         );
