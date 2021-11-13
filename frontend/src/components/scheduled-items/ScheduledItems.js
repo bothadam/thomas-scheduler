@@ -1,5 +1,6 @@
 import moment from "moment";
 import React, { useEffect, useState } from "react";
+import Emitter from "../../services/Emitter";
 import "./ScheduledItems.css";
 
 function ScheduledItems({}) {
@@ -7,8 +8,8 @@ function ScheduledItems({}) {
   const [scheduledItems, setScheduledItems] = useState([]);
 
   useEffect(() => {
-    try {
-      const getScheduledItems = async () => {
+    const getScheduledItems = async () => {
+      try {
         let response = await fetch(
           `${REACT_APP_API_URL}/scheduled-expiry-items`
         );
@@ -17,12 +18,18 @@ function ScheduledItems({}) {
           (a, b) => new Date(a.expiry_date) - new Date(b.expiry_date)
         );
         setScheduledItems(response);
-      };
-      getScheduledItems();
-    } catch (e) {
-      console.log("COULD NOT FETCH DATA", e);
-    }
-  }, []);
+      } catch (e) {
+        console.log("COULD NOT FETCH DATA", e);
+      }
+    };
+    getScheduledItems();
+
+    Emitter.subscribe("NEW_ITEM_SCHEDULED", () => getScheduledItems());
+
+    return () => {
+      Emitter.unsubscribe("NEW_ITEM_SCHEDULED");
+    };
+  });
 
   return (
     <div className="ScheduledItems">

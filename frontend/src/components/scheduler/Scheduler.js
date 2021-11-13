@@ -4,6 +4,7 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import DateTimePicker from "@mui/lab/DateTimePicker";
 import { CircularProgress } from "@mui/material";
+import Emitter from "../../services/Emitter";
 
 function Scheduler({}) {
   const [itemName, setItemName] = useState("");
@@ -26,6 +27,8 @@ function Scheduler({}) {
     });
 
     setIsLoading(false);
+
+    Emitter.emit("NEW_ITEM_SCHEDULED", null);
 
     setItemName("");
     setExpiryDate(null);
