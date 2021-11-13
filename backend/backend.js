@@ -45,9 +45,9 @@ app.get("/scheduled-expiry-items", (req, res) => {
 app.post("/create-product-expiry-reminder", (req, res) => {
   const { itemName, expiryDate } = req.body;
 
-  const scheduledDate = new Date(expiryDate);
-
   logScheduledItemInDb({ itemName, expiryDate });
+
+  const scheduledDate = new Date(expiryDate);
 
   schedule.scheduleJob(
     scheduledDate,
@@ -68,6 +68,7 @@ app.post("/create-product-expiry-reminder", (req, res) => {
       };
 
       transporter.verify().then(console.log).catch(console.error);
+
       transporter.sendMail(mailOptions, function (error, info) {
         if (error) {
           console.log(error);

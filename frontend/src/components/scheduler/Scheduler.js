@@ -3,28 +3,29 @@ import "./Scheduler.css";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import DateTimePicker from "@mui/lab/DateTimePicker";
+import { CircularProgress } from "@mui/material";
 
 function Scheduler({}) {
   const [itemName, setItemName] = useState("");
   const [expiryDate, setExpiryDate] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const { REACT_APP_API_URL } = process.env;
 
-  const scheduleEventButtonClicked = () => {
-    var xhr = new XMLHttpRequest();
-    xhr.open(
-      "POST",
-      `${REACT_APP_API_URL}/create-product-expiry-reminder`,
-      false
-    );
+  const scheduleEventButtonClicked = async () => {
+    setIsLoading(true);
 
-    xhr.setRequestHeader("Content-Type", "application/json");
-
-    xhr.send(
-      JSON.stringify({
+    await fetch(`${REACT_APP_API_URL}/create-product-expiry-reminder`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
         itemName: itemName,
         expiryDate: expiryDate,
-      })
-    );
+      }),
+    });
+
+    setIsLoading(false);
 
     setItemName("");
     setExpiryDate(null);
@@ -53,8 +54,9 @@ function Scheduler({}) {
         id="add-schedule"
         variant="contained"
         style={{ height: 50 }}
+        disabled={isLoading}
       >
-        Create Reminder
+        {isLoading ? <CircularProgress size={22} /> : "Create Reminder"}
       </Button>
     </div>
   );
