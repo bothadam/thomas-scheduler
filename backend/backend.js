@@ -68,8 +68,6 @@ app.post("/create-product-expiry-reminder", (req, res) => {
         text: `This product will expire: ${x}`,
       };
 
-      transporter.verify().then(console.log).catch(console.error);
-
       transporter.sendMail(mailOptions, function (error, info) {
         if (error) {
           console.log(error);
