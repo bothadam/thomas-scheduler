@@ -3,6 +3,7 @@ const cors = require("cors");
 const schedule = require("node-schedule");
 var nodemailer = require("nodemailer");
 const sqlite3 = require("sqlite3");
+require("dotenv").config();
 
 const app = express();
 app.use(express.json());
@@ -56,7 +57,7 @@ app.post("/create-product-expiry-reminder", (req, res) => {
         service: "gmail",
         auth: {
           user: "visionzclan007@gmail.com",
-          pass: "onoqihwrqhdxavwq",
+          pass: process.env.GMAIL_APP_PASSWORD,
         },
       });
 

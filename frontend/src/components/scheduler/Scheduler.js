@@ -5,6 +5,7 @@ import TextField from "@mui/material/TextField";
 import DateTimePicker from "@mui/lab/DateTimePicker";
 import { CircularProgress } from "@mui/material";
 import Emitter from "../../services/Emitter";
+import moment from "moment";
 
 function Scheduler({}) {
   const [itemName, setItemName] = useState("");
@@ -51,6 +52,7 @@ function Scheduler({}) {
           setExpiryDate(newValue);
         }}
         renderInput={(params) => <TextField {...params} />}
+        minDate={moment().startOf("day")}
       />
       <Button
         onClick={scheduleEventButtonClicked}
